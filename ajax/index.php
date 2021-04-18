@@ -21,7 +21,7 @@
 	$usersResult = mysqli_query($con, $sqlUsers);
 	
 	// fetch resulting colors row as an array
-	$colors = mysqli_fetch_array($colorResult);
+	// $colors = mysqli_fetch_array($colorResult);
 	$charities = mysqli_fetch_array($charitiesResult);
 	$pixels = mysqli_fetch_array($pixelsResult);
 	$users = mysqli_fetch_array($usersResult);
@@ -29,12 +29,12 @@
 	// close connection
 	mysqli_close($con);
 
-	// example of it working
-	while($row = mysqli_fetch_array($colorResult)) {
-		echo $row['color_name'];
-		echo " " . $row['hexcode'];
-		echo "<br>";
-	}
+	// // example of it working
+	// while($row = mysqli_fetch_array($colorResult)) {
+	// 	echo $row['color_name'];
+	// 	echo " " . $row['hexcode'];
+	// 	echo "<br>";
+	// }
 ?>
 
 <!DOCTYPE html>
@@ -47,6 +47,17 @@
     <h1>Pixels For Humanity</h1>
 	
     <h2>Pick A Color</h2>
+	<div class="container">
+		<div class="row">
+			<?php while($row = mysqli_fetch_array($colorResult)) { ?>
+				<button>
+					<?php 
+						echo htmlspecialchars($row['color_name']);
+					?>
+				</button>
+			<?php } ?>
+		</div>
+	</div>
 
     <canvas id="pixelCanvas" width="1020" height="1020"></canvas>
 
