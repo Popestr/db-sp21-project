@@ -1,5 +1,5 @@
 <?php
-	include_once("../../library.php"); //to connect to the database
+	require_once('./library.php'); //to connect to the database
 	$con = new mysqli($SERVER, $USERNAME, $PASSWORD, $DATABASE);
 	
 	//check connection
@@ -9,10 +9,10 @@
 	}
 	
 	// query for colors
-	$sqlColor = 'SELECT * FROM Colors';
-	$sqlCharities 'SELECT * FROM Charities';
-	$sqlPixels 'SELECT * FROM Pixels';
-	$sqlUsers 'SELECT * FROM Users';
+	$sqlColor = "SELECT * FROM `Colors`";
+	$sqlCharities = "SELECT * FROM `Charities`";
+	$sqlPixels = "SELECT * FROM `Pixels`";
+	$sqlUsers = "SELECT * FROM `Users`";
 
 	// make the query and get the result
 	$colorResult = mysqli_query($con, $sqlColor);
@@ -29,12 +29,12 @@
 	// close connection
 	mysqli_close($con);
 
-	// // example of it working
-	// while($row = mysqli_fetch_array($colorResult)) {
-	// 	echo $row['color_name'];
-	// 	echo " " . $row['hexcode'];
-	// 	echo "<br>";
-	// }
+	// example of it working
+	while($row = mysqli_fetch_array($colorResult)) {
+		echo $row['color_name'];
+		echo " " . $row['hexcode'];
+		echo "<br>";
+	}
 ?>
 
 <!DOCTYPE html>
