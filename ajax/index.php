@@ -21,7 +21,7 @@
 	$usersResult = mysqli_query($con, $sqlUsers);
 	
 	// fetch resulting colors row as an array
-	// $colors = mysqli_fetch_array($colorResult);
+	// $colors = mysqli_fetch_array($colorResult);  // this needs to be commented out bc it returns and deletes the first row when fetch is called.
 	$charities = mysqli_fetch_array($charitiesResult);
 	$pixels = mysqli_fetch_array($pixelsResult);
 	$users = mysqli_fetch_array($usersResult);
