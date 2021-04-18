@@ -48,7 +48,6 @@
 	
     <h2>Pick A Color</h2>
 
-    <h2>Design Canvas</h2>
     <canvas id="pixelCanvas" width="1020" height="1020"></canvas>
 
     <script src="art.js"></script>
