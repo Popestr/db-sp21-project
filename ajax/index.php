@@ -42,24 +42,24 @@
 <head>
     <title>Pixels For Humanity</title>
     <link rel="stylesheet" href="app.css">
+	<script src="js/jquery-1.6.2.min.js" type="text/javascript"></script> 
 </head>
 <body>
     <h1>Pixels For Humanity</h1>
-	
+
     <h2>Pick A Color</h2>
 	<div class="container">
-		<div class="row">
-			<?php while($row = mysqli_fetch_array($colorResult)) { ?>
-				<button>
-					<?php 
-						echo htmlspecialchars($row['color_name']);
-					?>
-				</button>
-			<?php } ?>
-		</div>
+		<?php
+			echo "<select name='color-list' id='color-list'>";
+			while ($row = mysqli_fetch_array($colorResult)) {
+				echo "<option id='color-input' value='" . $row['hexcode'] . "'>" . $row['color_name'] . "</option>";
+			}
+			echo "</select>";
+		?>
 	</div>
+	<br>
 
-    <canvas id="pixelCanvas" width="1020" height="1020"></canvas>
+    <canvas id="pixelCanvas" width="1000" height="1000"></canvas>
 
     <script src="art.js"></script>
 </body>
