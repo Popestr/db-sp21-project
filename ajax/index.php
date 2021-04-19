@@ -61,6 +61,6 @@
 
     <canvas id="pixelCanvas" width="1000" height="1000"></canvas>
 
-    <script src="art.js"></script>
+    <script src="app.js"></script>
 </body>
 </html>
