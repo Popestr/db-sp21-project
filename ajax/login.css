@@ -89,13 +89,13 @@
 	font-weight: normal;
 }
 .navtop div a {
-	padding: 0 20px;
+	padding: 0 0px 0 0px;
 	text-decoration: none;
 	color: #c1c4c8;
 	font-weight: bold;
 }
 .navtop div a i {
-	padding: 2px 8px 0 0;
+	padding: 2px 8px 0 20px;
 }
 .navtop div a:hover {
 	color: #eaebed;

@@ -52,7 +52,7 @@ if (!isset($_SESSION['loggedin'])) {
 	<body class="loggedin">
 		<nav class="navtop">
 			<div>
-                <h1><a href="home.php"> Pixels for Humanity </a></h1>
+                <h1><a href="home.php"> <img src="static/images/logo.png" style="padding-left=-10" height="200" width="400" alt="PFH Logo"></a> </h1>
 				<a href="profile.php"><i class="fas fa-user-circle"></i>Profile</a>
 				<a href="logout.php"><i class="fas fa-sign-out-alt"></i>Logout</a>
 			</div>
