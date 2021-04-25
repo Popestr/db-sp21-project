@@ -11,8 +11,7 @@ echo "Failed to connect to MySQL: " . mysqli_connect_error();
 }
 
 if ( !isset($_POST['username'], $_POST['password']) ) {
-    echo "<script>alert('Please fill both the username and password fields!')</script>";
-    include('index.html');
+	exit('Please fill both the username and password fields!');
 }
 
 if ($stmt = $con->prepare('SELECT id, password FROM Users WHERE username = ?')) {
@@ -29,12 +28,10 @@ if ($stmt = $con->prepare('SELECT id, password FROM Users WHERE username = ?')) 
             $_SESSION['id'] = $id;
             header('Location: home.php');
         } else {
-            echo "<script>alert('Incorrect username and/or password!')</script>";
-            include('index.html');
+            echo 'Incorrect username and/or password!';
         }
     } else {
-        echo "<script>alert('Incorrect username and/or password!')</script>";
-        include('index.html');
+        echo 'Incorrect username and/or password!';
     }
 	$stmt->close();
 }

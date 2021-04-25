@@ -11,22 +11,18 @@ echo "Failed to connect to MySQL: " . mysqli_connect_error();
 }
 
 if (!isset($_POST['username'], $_POST['password'], $_POST['email'])) {
-    echo "<script>alert('Please complete the registration form!')</script>";
-    include('register.html');
+	exit('Please complete the registration form!');
 }
 if (empty($_POST['username']) || empty($_POST['password']) || empty($_POST['email'])) {
-    echo "<script>alert('Please complete the registration form')</script>";
-    include('register.html');
+	exit('Please complete the registration form');
 }
 
 if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
-    echo "<script>alert('Email is not valid!')</script>";
-    include('register.html');
+	exit('Email is not valid!');
 }
 
 if (preg_match('/^[a-zA-Z0-9]+$/', $_POST['username']) == 0) {
-    echo "<script>alert('Username is not valid!')</script>";
-    include('register.html');
+    exit('Username is not valid!');
 }
 
 if ($stmt = $con->prepare('SELECT id, password FROM Users WHERE username = ?')) {
@@ -34,8 +30,7 @@ if ($stmt = $con->prepare('SELECT id, password FROM Users WHERE username = ?')) 
 	$stmt->execute();
 	$stmt->store_result();
 	if ($stmt->num_rows > 0) {
-		echo "<script>alert('Username exists, please choose another!')</script>";
-        include('register.html');
+		echo 'Username exists, please choose another!';
 	} else {
         if ($stmt = $con->prepare('INSERT INTO Users (username, password, email) VALUES (?, ?, ?)')) {
             $password = $_POST['password'];
