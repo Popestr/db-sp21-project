@@ -5,13 +5,6 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
-.center {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    text-align: center;
-    padding-right: 7px;
-}
 
 .login {
     width: 400px;
@@ -38,7 +31,7 @@
     align-items: center;
     width: 50px;
     height: 50px;
-    background-color: #232323;
+    background-color: #3274d6;
     color: #ffffff;
 }
 .login form input[type="password"], .login form input[type="text"] {
@@ -52,7 +45,7 @@
     width: 100%;
     padding: 15px;
    margin-top: 20px;
-    background-color: #232323;
+    background-color: #3274d6;
     border: 0;
     cursor: pointer;
     font-weight: bold;
@@ -60,7 +53,7 @@
     transition: background-color 0.2s;
 }
 .login form input[type="submit"]:hover {
-  background-color: #232323;
+  background-color: #2868c7;
     transition: background-color 0.2s;
 }
 
@@ -140,7 +133,7 @@ body.loggedin {
     -moz-osx-font-smoothing: grayscale;
 }
 body {
-    background-color: #4f4f4f;
+    background-color: #435165;
     margin: 0;
 }
 .register {
@@ -168,7 +161,7 @@ body {
     align-items: center;
     width: 50px;
    height: 50px;
-    background-color: #232323;
+    background-color: #3274d6;
     color: #ffffff;
 }
 .register form input[type="password"], .register form input[type="text"], .register form input[type="email"] {
@@ -182,7 +175,7 @@ body {
     width: 100%;
     padding: 15px;
     margin-top: 20px;
-    background-color: #232323;
+    background-color: #3274d6;
    border: 0;
     cursor: pointer;
     font-weight: bold;
@@ -190,6 +183,6 @@ body {
     transition: background-color 0.2s;
 }
 .register form input[type="submit"]:hover {
-  background-color: #232323;
+  background-color: #2868c7;
     transition: background-color 0.2s;
 }
