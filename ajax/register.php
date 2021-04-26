@@ -1,6 +1,7 @@
 <?php
 session_start();
 ini_set('display_errors', 1);
+include('./lib/password.php');
 require_once('./library.php'); //to connect to the database
 $con = new mysqli($SERVER, $USERNAME, $PASSWORD, $DATABASE);
 
@@ -38,7 +39,7 @@ if ($stmt = $con->prepare('SELECT id, password FROM Users WHERE username = ?')) 
         include('register.html');
 	} else {
         if ($stmt = $con->prepare('INSERT INTO Users (username, password, email) VALUES (?, ?, ?)')) {
-            $password = $_POST['password'];
+            $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
             $stmt->bind_param('sss', $_POST['username'], $password, $_POST['email']);
             $stmt->execute();
             header('Location: success.html');

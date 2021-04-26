@@ -1,5 +1,6 @@
 <?php
 session_start();
+include('./lib/password.php');
 ini_set('display_errors', 1);
 require_once('./library.php'); //to connect to the database
 $con = new mysqli($SERVER, $USERNAME, $PASSWORD, $DATABASE);
@@ -22,7 +23,7 @@ if ($stmt = $con->prepare('SELECT id, password FROM Users WHERE username = ?')) 
     if ($stmt->num_rows > 0) {
         $stmt->bind_result($id, $password);
         $stmt->fetch();
-        if ($_POST['password'] === $password) {
+        if (password_verify($_POST['password'], $password)) {
             session_regenerate_id();
             $_SESSION['loggedin'] = TRUE;
             $_SESSION['name'] = $_POST['username'];
