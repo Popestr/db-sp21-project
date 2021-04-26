@@ -38,9 +38,10 @@ if ($stmt = $con->prepare('SELECT id, password FROM Users WHERE username = ?')) 
 		echo "<script>alert('Username exists, please choose another!')</script>";
         include('register.html');
 	} else {
-        if ($stmt = $con->prepare('INSERT INTO Users (username, password, email) VALUES (?, ?, ?)')) {
+        if ($stmt = $con->prepare('INSERT INTO Users (username, password, email, userrole) VALUES (?, ?, ?, ?)')) {
             $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
-            $stmt->bind_param('sss', $_POST['username'], $password, $_POST['email']);
+            $userrole = "donator";
+            $stmt->bind_param('ssss', $_POST['username'], $password, $_POST['email'], $userrole);
             $stmt->execute();
             header('Location: success.html');
         }
