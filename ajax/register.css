@@ -22,7 +22,7 @@ body {
     width: 400px;
     background-color: #ffffff;
     box-shadow: 0 0 9px 0 rgba(0, 0, 0, 0.3);
-    margin: 100px auto;
+    margin: 50px auto;
 }
 .register h1 {
     text-align: center;
@@ -57,14 +57,15 @@ body {
     width: 100%;
     padding: 15px;
     margin-top: 20px;
+    margin-bottom: 20px;
     background-color: #232323;
-   border: 0;
+    border: 0;
     cursor: pointer;
     font-weight: bold;
     color: #ffffff;
     transition: background-color 0.2s;
 }
 .register form input[type="submit"]:hover {
-  background-color: #232323;
+  background-color: #4f4f4f;
     transition: background-color 0.2s;
 }
