@@ -38,9 +38,9 @@ $feedbackResult = mysqli_query($con, $sqlFeedback);
 			<?php
 				while($row = mysqli_fetch_array($feedbackResult)){  
 					echo "<div><table>";
-					echo "<tr><td>" . "Username" . "</td><td>" . $row['username'] . "</td></tr>"; 
-					echo "<tr><td>" . "Title" . "</td><td>" . $row['title'] . "</td></tr>"; 
-					echo "<tr><td>" . "Comment" . "</td><td>" . $row['content'] . "</td></tr>"; 
+					echo "<tr><td>" . "Username:" . "</td><td>" . $row['username'] . "</td></tr>"; 
+					echo "<tr><td>" . "Title:" . "</td><td>" . $row['title'] . "</td></tr>"; 
+					echo "<tr><td>" . "Comment:" . "</td><td>" . $row['content'] . "</td></tr>"; 
 					echo "</table></div>";
 				}
 			?>
