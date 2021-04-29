@@ -16,18 +16,19 @@ if ( !isset($_POST['username'], $_POST['password']) ) {
     include('index.html');
 }
 
-if ($stmt = $con->prepare('SELECT id, password FROM Users WHERE username = ?')) {
+if ($stmt = $con->prepare('SELECT id, password, userrole FROM Users WHERE username = ?')) {
     $stmt->bind_param('s', $_POST['username']);
 	$stmt->execute();
 	$stmt->store_result();
     if ($stmt->num_rows > 0) {
-        $stmt->bind_result($id, $password);
+        $stmt->bind_result($id, $password, $userrole);
         $stmt->fetch();
         if (password_verify($_POST['password'], $password)) {
             session_regenerate_id();
             $_SESSION['loggedin'] = TRUE;
             $_SESSION['name'] = $_POST['username'];
             $_SESSION['id'] = $id;
+            $_SESSION['userrole'] = $userrole;
             header('Location: home.php');
         } else {
             echo "<script>alert('Incorrect username and/or password!')</script>";

@@ -23,17 +23,13 @@ $stmt->close();
 	<head>
 		<meta charset="utf-8">
 		<title>Profile Page</title>
-		<link href="login.css" rel="stylesheet" type="text/css">
+		<link href="styles/css/login.css" rel="stylesheet" type="text/css">
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
 	</head>
 	<body class="loggedin">
-		<nav class="navtop">
-			<div>
-			<h1><a href="home.php"> <img src="static/images/logo.png" style="padding-left=-10" height="200" width="400" alt="PFH Logo"></a> </h1>
-				<a href="profile.php"><i class="fas fa-user-circle"></i>Profile</a>
-				<a href="logout.php"><i class="fas fa-sign-out-alt"></i>Logout</a>
-			</div>
-		</nav>
+		<?php
+		include("base.php");
+		?>
 		<div class="content">
 			<h2>Profile Page</h2>
 			<div>
