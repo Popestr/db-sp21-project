@@ -17,9 +17,9 @@ if (!isset($_SESSION['loggedin'])) {
             <h1><a href="home.php"> <img src="static/images/logo.png" style="padding-left=-10" height="200" width="400" alt="PFH Logo"></a> </h1>
             <?php
                 // If the user is not logged in redirect to the login page...
-                if (isset($_SESSION['userrole']) && $_SESSION['userrole'] == 'admin') {
+                if (isset($_SESSION['userrole']) && $_SESSION['userrole'] == 'hs2fw_a') {
                     echo '<a href="admin.php"><i></i>Admin</a>';
-                }elseif(isset($_SESSION['userrole']) && $_SESSION['userrole'] == 'donator'){
+                }elseif(isset($_SESSION['userrole']) && $_SESSION['userrole'] == 'hs2fw_b'){
                     echo '<a href="feedbackform.php"><i></i>Feedback</a>';
                 }
             ?>

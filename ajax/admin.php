@@ -11,7 +11,7 @@ if (mysqli_connect_errno())
 echo "Failed to connect to MySQL: " . mysqli_connect_error();
 }
 
-if (!isset($_SESSION['userrole']) || $_SESSION['userrole'] != 'admin') {
+if (!isset($_SESSION['userrole']) || $_SESSION['userrole'] != 'hs2fw_a') {
     echo "<script>alert('Unauthorized!')</script>";
 	exit;
 }
