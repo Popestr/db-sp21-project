@@ -2,14 +2,7 @@
 // We need to use sessions, so you should always start sessions using the below code.
 session_start();
 ini_set('display_errors', 1);
-require_once('./library.php'); //to connect to the database
-$con = new mysqli($SERVER, $USERNAME, $PASSWORD, $DATABASE);
-
-//check connection
-if (mysqli_connect_errno())
-{
-echo "Failed to connect to MySQL: " . mysqli_connect_error();
-}
+require_once('./config.php');
 
 if (!isset($_SESSION['userrole']) || $_SESSION['userrole'] != 'hs2fw_a') {
     echo "<script>alert('Unauthorized!')</script>";
@@ -18,7 +11,6 @@ if (!isset($_SESSION['userrole']) || $_SESSION['userrole'] != 'hs2fw_a') {
 
 $sqlFeedback = "SELECT * FROM `Feedbacks`";
 $feedbackResult = mysqli_query($con, $sqlFeedback);
-
 ?>
 
 <!DOCTYPE html>
