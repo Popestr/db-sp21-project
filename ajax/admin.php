@@ -41,6 +41,7 @@ $feedbackResult = mysqli_query($con, $sqlFeedback);
 					echo "<tr><td>" . "Username:" . "</td><td>" . $row['username'] . "</td></tr>"; 
 					echo "<tr><td>" . "Title:" . "</td><td>" . $row['title'] . "</td></tr>"; 
 					echo "<tr><td>" . "Comment:" . "</td><td>" . $row['content'] . "</td></tr>"; 
+					echo "<tr><td>" . "<a href='feedback.php?del=" . $row['id'] . "' class='del_btn'> Delete </a>" . "</td></tr>"; 
 					echo "</table></div>";
 				}
 			?>

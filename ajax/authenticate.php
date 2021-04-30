@@ -2,14 +2,7 @@
 session_start();
 include('./lib/password.php');
 ini_set('display_errors', 1);
-require_once('./library.php'); //to connect to the database
-$con = new mysqli($SERVER, $USERNAME, $PASSWORD, $DATABASE);
-
-//check connection
-if (mysqli_connect_errno())
-{
-echo "Failed to connect to MySQL: " . mysqli_connect_error();
-}
+require_once('./config.php');
 
 if ( !isset($_POST['username'], $_POST['password']) ) {
     echo "<script>alert('Please fill both the username and password fields!')</script>";

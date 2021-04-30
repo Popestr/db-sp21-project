@@ -40,7 +40,11 @@ if (isset($_GET['del'])) {
         $id = $_GET['del'];
         $stmt->bind_param('i', $id);
         $stmt->execute();
-        header('Location: manageFeedbacks.php');
+        if($_SESSION['userrole'] == 'hs2fw_a'){
+            header('Location: admin.php');
+        }else{
+            header('Location: manageFeedbacks.php');
+        }
         $_SESSION['message'] = "Feedback deleted!"; 
         $stmt->close();
     }else{
