@@ -48,11 +48,13 @@ function init(){
     let numCols = 20;
 
     makeGrid(numRows, numCols, "black");
-    
+
     for(let i = 0; i < numRows; i++){
         gridInfo[i] = [];
         for(let j = 0; j < numCols; j++){
             drawSquare[i,j,gridInfo[i][j].color]
+            gridInfo[i][j].charity = "None"
+            gridInfo[i][j].selected = false
         }
     }
     function findIndex(num, size) {
