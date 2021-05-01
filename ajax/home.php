@@ -25,8 +25,7 @@ $jsrows = array();
 while($r = mysqli_fetch_assoc($pixelColorResult)){
     $jsrows[] = $r;
 }
-$jsPixelColors = json_encode($jsrows);
-echo $jsPixelColors;
+$jsPixelColors = json_encode($jsrows); //jsPixelColors is now a JSON encoded object, to be set to a js var later 
 
 // close connection
 mysqli_close($con);
