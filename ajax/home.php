@@ -17,7 +17,7 @@ $sqlCharity = "SELECT * FROM `Charities`";
 $charityResult = mysqli_query($con, $sqlCharity);
 
 // query for pixel colors
-$pixelColor = "SELECT 'color' FROM 'Pixel_Color'";
+$pixelColor = "SELECT * FROM `Pixel_Color`";
 $pixelColorResult = mysqli_query($con, $pixelColor);
 
 
@@ -60,11 +60,9 @@ if (!isset($_SESSION['loggedin'])) {
                     }
                     echo "</select></span>";
 
-                    echo "<span id='color'><label id='colors-label'>test:</label><select name='colors' id='colors'>";
                     while ($row = mysqli_fetch_array($pixelColorResult)) {
-                        echo "<option id='color-test' value='" . $row['color'] . "'>" . $row['color'] . "</option>";
+                        echo $row[`color`];
                     }
-                    echo "</select></span>";
                 ?>
             </div>
 
