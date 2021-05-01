@@ -61,7 +61,8 @@ if (!isset($_SESSION['loggedin'])) {
                     echo "</select></span>";
 
                     while ($row = mysqli_fetch_array($pixelColorResult)) {
-                        echo $row[`color`];
+                        echo $row['pixel_id'];
+                        echo $row['color'];
                     }
                 ?>
             </div>
