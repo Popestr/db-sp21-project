@@ -10,6 +10,8 @@ let canvasHeight = canvas.height;
 let gridInfo = [];
 let totalSelected = 0;
 let thisColor = "white";
+var pix_color_result = JSON.parse(pixel_colors)
+
 function makeGrid(numRows, numCols, color) {
     ctx.fillStyle = "white";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -21,7 +23,7 @@ function makeGrid(numRows, numCols, color) {
     for(let i = 0; i < numRows; i++){
         gridInfo[i] = [];
         for(let j = 0; j < numCols; j++){
-            thisColor = pixel_colors[i*20+j+1].color;
+            thisColor = pix_color_result[i*20+j+1].color;
             gridInfo[i][j] = {color:thisColor, charity:"None", selected:false};
         }
     }
