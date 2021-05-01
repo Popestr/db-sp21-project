@@ -10,11 +10,16 @@ $sqlColor = "SELECT * FROM `Colors`";
 // make the query and get the result
 $colorResult = mysqli_query($con, $sqlColor);
 
-// query for colors
+// query for Charities
 $sqlCharity = "SELECT * FROM `Charities`";
 
 // make the query and get the result
 $charityResult = mysqli_query($con, $sqlCharity);
+
+// query for pixel colors
+$pixelColor = "SELECT 'color' FROM 'Pixel_Color'";
+$pixelColorResult = mysqli_query($con, $pixelColor);
+
 
 // close connection
 mysqli_close($con);
@@ -58,7 +63,9 @@ if (!isset($_SESSION['loggedin'])) {
             </div>
 
             <canvas id="pixelCanvas" width="1000" height="1000"></canvas>
-            
+            <script type="text/javascript">
+                var pixel_colors = <?php echo json_encode($pixelColorResult); ?>;
+            </script>
             <script src="app.js"></script>
 		</div>
         <div id="purchase-info">
