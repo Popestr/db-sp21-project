@@ -194,3 +194,84 @@ body {
   background-color: #232323;
     transition: background-color 0.2s;
 }
+
+#charity-label, #color-label{
+    margin-right: 20px;
+    font-weight: bold;
+}
+
+#charity{
+    float: right;
+    position: relative;
+    right: 25%;
+    width:25%
+}
+
+#colorsel{
+    position: relative;
+    width:25%;
+    left: 25%;
+}
+
+#grid-container{
+    display:grid;
+    grid-template-columns: 20% 60% 20%;
+}
+
+#main-content{
+    grid-column-start: 2;
+}
+
+#purchase-info{
+    grid-column-start:3;
+    margin-top: 20%;
+    width: 90%;
+}
+
+#purchase-header{
+    text-align: center;
+    background-color: black;
+    font-weight: bold;
+    border-radius: 3px;
+    color: white;
+    height: 4em;
+    padding-top: 1em;
+    font-size: 30px;
+}
+
+#purchase-contents{
+    padding-left: 3px;
+    padding-right:3px;
+    padding-top: 10px;
+    height: 60vh;
+    overflow-y: scroll;
+    background-color: white;
+    border: 1px solid black;
+}
+
+#purchase-bottom{
+    display: grid;
+    grid-template-columns: 50% 50%;
+}
+
+.item-pixel{
+    background-color: red;
+    height: 30px;
+    width: 30px;
+    display:inline-block;
+}
+.item-text{
+    margin:auto;
+    padding-left: 10px;
+}
+.item{
+    width:100%;
+}
+.cost{
+    float:right;
+    font-weight: bold;
+}
+#purchase-total{
+    text-align: right;
+    grid-column-start: 2;
+}
