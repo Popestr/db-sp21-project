@@ -59,7 +59,7 @@ if (!isset($_SESSION['loggedin'])) {
                         echo "<option id='charity-input' value='" . $row['charity_name'] . "'>" . $row['charity_name'] . "</option>";
                     }
                     echo "</select></span>";
-                    echo "<span id='color'><label id='color'>Color test:</label><select name='color-list' id='color-list'>";
+                    echo "<span id='color'><label id='color'>test:</label><select name='colors' id='colors'>";
                     while ($row = mysqli_fetch_array($pixelColorResult)) {
                         echo "<option id='color-test' value='" . $row['color'] . "'>" . $row['color'] . "</option>";
                     }
