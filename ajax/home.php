@@ -17,7 +17,7 @@ $sqlCharity = "SELECT * FROM `Charities`";
 $charityResult = mysqli_query($con, $sqlCharity);
 
 // query for pixel colors
-$pixelColor = "SELECT * FROM `Pixel_Color`";
+$pixelColor = "SELECT * FROM `Pixel_Colors`";
 $pixelColorResult = mysqli_query($con, $pixelColor);
 
 
