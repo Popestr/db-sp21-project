@@ -48,6 +48,7 @@ function init(){
     let numCols = 20;
 
     makeGrid(numRows, numCols, "black");
+    drawSquare(0,0,gridInfo[0][0].color);
     /*
     for(let i = 0; i < numRows; i++){
         gridInfo[i] = [];
