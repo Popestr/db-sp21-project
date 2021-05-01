@@ -19,7 +19,11 @@ $charityResult = mysqli_query($con, $sqlCharity);
 // query for pixel colors
 $pixelColor = "SELECT * FROM `Pixel_Colors`";
 $pixelColorResult = mysqli_query($con, $pixelColor);
-$jsPixelColors = json_encode($pixelColorResult);
+$jsrows = array();
+while($r = mysqli_fetch_assoc($pixelColorResult)){
+    $jsrows[] = $r;
+}
+$jsPixelColors = json_encode($jsrows);
 echo "var pixel_colors = ". $jsPixelColors . ";\n";
 
 // close connection
