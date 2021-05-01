@@ -17,14 +17,14 @@ function makeGrid(numRows, numCols, color) {
     ctx.strokeStyle = color || "black";
     let width = canvasWidth / numCols;
     let height = canvasHeight / numRows;
-
+    /*
     for(let i = 0; i < numRows; i++){
         gridInfo[i] = [];
         for(let j = 0; j < numCols; j++){
             thisColor = pixel_colors[i*20+j+1];
             gridInfo[i][j] = {color:thisColor, charity:"None", selected:false};
         }
-    }
+    }*/
 
     for (let i = width; i < canvasWidth; i += width) {
         drawLine(i, 0, i, canvasHeight);
