@@ -282,3 +282,15 @@ body {
 #purchase-button:hover{
     background-color: greenyellow;
 }
+#pixel-info{
+    text-align: center;
+}
+
+/* #color-preview{
+    position: absolute;
+    top:25%;
+    display: inline-block;
+    height: 50%;
+    background-color: green;
+    border-radius: 50%;
+} */

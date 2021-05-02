@@ -44,14 +44,14 @@ if (!isset($_SESSION['loggedin'])) {
             <h2>Select a color and a charity of your choice</h2>
             <div class="container">
                 <?php
-                    echo "<span id='colorsel'><label id='color-label'>Color:</label><select name='color-list' id='color-list'>";
+                    echo "<span id='colorsel'><label id='color-label'>Color:</label><span id='color-preview'></span><select name='color-list' id='color-list'>";
                     while ($row = mysqli_fetch_array($colorResult)) {
                         echo "<option id='color-input' value='" . $row['hexcode'] . "'>" . $row['color_name'] . "</option>";
                     }
                     echo "</select></span>";
                     echo "<span id='charity'><label id='charity-label'>Charity:</label><select name='charity-list' id='charity-list'>";
                     while ($row = mysqli_fetch_array($charityResult)) {
-                        echo "<option id='charity-input' value='" . $row['charity_name'] . "'>" . $row['charity_name'] . "</option>";
+                        echo "<option id='charity-input' value='" . $row['charity_id'] . "'>" . $row['charity_name'] . "</option>";
                     }
                     echo "</select></span>";
                     /* debugging code, shows that DB query works correctly. Now pass it to js file
@@ -60,6 +60,9 @@ if (!isset($_SESSION['loggedin'])) {
                         echo $row['color'];
                     }*/
                 ?>
+            </div>
+            <div id="pixel-info">
+                    Hover over a pixel to view its info!
             </div>
 
             <canvas id="pixelCanvas" width="1000" height="1000"></canvas>

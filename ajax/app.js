@@ -110,6 +110,7 @@ function drawSquare(x, y, hexcode, color, init = false) {
 
     if (!init) {
         let chr = document.getElementById("charity-list").value;
+        let chrname = $("#charity-list option:selected").text()
 
         pixel.hexcode = hexcode
         pixel.color = color
@@ -119,12 +120,18 @@ function drawSquare(x, y, hexcode, color, init = false) {
         selectedForPurchase.push({ id: (pxs[1] * numRows + pxs[0] + 1), color: color, charity: chr })
         $("#total-num").html(totalSelected)
 
-        $("#purchase-contents").append("<div class='item'><span class='item-pixel' id='pixel-" + (pxs[1] * numRows + pxs[0]) + "' style='background-color:" + hexcode + "'></span><span class='item-text' id='item-" + (pxs[1] * numRows + pxs[0]) + "'>@ (" + pxs[1] + ", " + pxs[0] + ") supporting " + chr +
+        $("#purchase-contents").append("<div class='item'><span class='item-pixel' id='pixel-" + (pxs[1] * numRows + pxs[0]) + "' style='background-color:" + hexcode + "'></span><span class='item-text' id='item-" + (pxs[1] * numRows + pxs[0]) + "'>@ (" + pxs[1] + ", " + pxs[0] + ") supporting " + chrname +
             " </span><span class='cost'>$1</span></div><hr/>")
     }
 }
 
 function init() {
+
+    $("#color-list").css("outline", "5px solid " + $("#color-list").val());
+
+    $("#color-list").change(function () {
+        $("#color-list").css("outline", "5px solid " + $("#color-list").val());
+    });
 
     $.get("retrieve_pixels.php", function (data) {
         pixel_colors = JSON.parse(data);
@@ -153,13 +160,50 @@ function init() {
             drawSquare(x, y, colorInput.value, $("#color-list option:selected").text());
         }
     }
+
+    canvas.onmousemove = function (event) {
+        event.preventDefault();
+
+        let margin = this.getBoundingClientRect();
+        let x = event.clientX - margin.left;
+        let y = event.clientY - margin.top;
+
+        let pxs = pixelCoords(findIndex(x, canvasWidth / numCols), findIndex(y, canvasHeight / numRows));
+        let pixel = pixel_colors[(pxs[1] * numRows + pxs[0])];
+
+        if (pixel.color != "white") {
+
+            let date = new Date(pixel.purchase_date);
+
+            // adapted from https://stackoverflow.com/questions/12409299/
+            const monthNames = ["January", "February", "March", "April", "May", "June",
+                "July", "August", "September", "October", "November", "December"];
+            const month = monthNames[date.getMonth()];
+            const day = String(date.getDate()).padStart(2, '0');
+            const year = date.getFullYear();
+            const output = month + '\n' + day + ', ' + year;
+
+            $("#pixel-info").html("Pixel " + (pxs[1] * numRows + pxs[0]) + " donated by <strong>" + pixel.username + "</strong> on " + output + ", supporting <strong>" + pixel.charity_name + "</strong>");
+        }
+        else {
+            $("#pixel-info").html("This pixel has not yet been purchased! Select a color and a charity and click this pixel to add it to your cart!");
+        }
+
+
+    }
+
+    canvas.onmouseleave = function (event) {
+        $("#pixel-info").html("Hover over a pixel to view its info!");
+    }
 }
 
 function collectAndPurchase() {
     console.log(selectedForPurchase)
     $.post("purchase.php", {
-        ptp: JSON.stringify(selectedForPurchase)
+        ptp: JSON.stringify(selectedForPurchase),
+        amt: totalSelected
     }, function (data) {
+        console.log(data);
         if (confirm("Your purchase was successful! The page will now refresh.")) {
             location.reload()
         }
