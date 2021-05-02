@@ -53,7 +53,7 @@ function init(){
 
     makeGrid(numRows, numCols, "black");
 
-    /*
+    
     for(let i = 0; i < numRows; i++){ //draw in the squares based on the DB query. Since drawSquare function also sets
         gridInfo[i] = [];               // charity and selected, reset those fields
         for(let j = 0; j < numCols; j++){
@@ -61,7 +61,7 @@ function init(){
             gridInfo[i][j].charity = "None"
             gridInfo[i][j].selected = false
         }
-    }*/
+    }
 
     function findIndex(num, size) {
         num = num - (num % size);
