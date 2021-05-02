@@ -24,7 +24,7 @@ function makeGrid(numRows, numCols, color) {
     for(let i = 0; i < numRows; i++){
         gridInfo[i] = [];
         for(let j = 0; j < numCols; j++){
-            thisColor = pix_color_result[i*20+j+1].color;
+            thisColor = pix_color_result[i*20+j+1].color; // + 1 because pixel_id is from 1-400 b/c auto_increment in phpmyadmin starts from 1
             gridInfo[i][j] = {color:thisColor, charity:"None", selected:false};
         }
     }
@@ -53,10 +53,10 @@ function init(){
     makeGrid(numRows, numCols, "black");
 
     /*
-    for(let i = 0; i < numRows; i++){
-        gridInfo[i] = [];
+    for(let i = 0; i < numRows; i++){ //draw in the squares based on the DB query. Since drawSquare function also sets
+        gridInfo[i] = [];               // charity and selected, reset those fields
         for(let j = 0; j < numCols; j++){
-            drawSquare[i,j,gridInfo[i][j].color]
+            drawSquare[i,j,gridInfo[i][j].color] 
             gridInfo[i][j].charity = "None"
             gridInfo[i][j].selected = false
         }

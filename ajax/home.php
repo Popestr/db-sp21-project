@@ -65,7 +65,7 @@ if (!isset($_SESSION['loggedin'])) {
                         echo "<option id='charity-input' value='" . $row['charity_name'] . "'>" . $row['charity_name'] . "</option>";
                     }
                     echo "</select></span>";
-                    /*
+                    /* debugging code, shows that DB query works correctly. Now pass it to js file
                     while ($row = mysqli_fetch_array($pixelColorResult)) {
                         echo $row['pixel_id'];
                         echo $row['color'];
@@ -76,7 +76,7 @@ if (!isset($_SESSION['loggedin'])) {
             <canvas id="pixelCanvas" width="1000" height="1000"></canvas>
             <!-- https://stackoverflow.com/questions/2928827/access-php-var-from-external-javascript-file -->
             <script type="text/javascript">
-                var pixel_colors = "<?php echo $jsPixelColors; ?>";
+                var pixel_colors = <?php echo $jsPixelColors; ?>;
             </script>
             <script src="app.js"></script>
 		</div>
