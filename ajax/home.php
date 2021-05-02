@@ -16,17 +16,6 @@ $sqlCharity = "SELECT * FROM `Charities`";
 // make the query and get the result
 $charityResult = mysqli_query($con, $sqlCharity);
 
-// query for pixel colors
-$pixelColor = "SELECT * FROM `Pixel_Colors`";
-$pixelColorResult = mysqli_query($con, $pixelColor);
-
-// https://stackoverflow.com/questions/383631/json-encode-mysql-results
-$jsrows = array();
-while($r = mysqli_fetch_assoc($pixelColorResult)){
-    $jsrows[] = $r;
-}
-$jsPixelColors = json_encode($jsrows); //jsPixelColors is now a JSON encoded object, to be set to a js var later 
-
 // close connection
 mysqli_close($con);
 
@@ -75,9 +64,9 @@ if (!isset($_SESSION['loggedin'])) {
 
             <canvas id="pixelCanvas" width="1000" height="1000"></canvas>
             <!-- https://stackoverflow.com/questions/2928827/access-php-var-from-external-javascript-file -->
-            <script type="text/javascript">
+            <!-- <script type="text/javascript">
                 var pixel_colors = <?php echo $jsPixelColors; ?>; //pass to app.js
-            </script>
+            </script> -->
             <script src="app.js"></script>
 		</div>
         <div id="purchase-info">
