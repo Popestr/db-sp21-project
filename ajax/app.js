@@ -206,8 +206,7 @@ function collectAndPurchase() {
         console.log(data);
         if (confirm("Your purchase was successful! The page will now refresh.")) {
             location.reload()
-        }
-        else {
+        } else {
             location.reload()
         }
     })
