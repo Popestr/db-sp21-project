@@ -76,7 +76,7 @@ if (!isset($_SESSION['loggedin'])) {
             <canvas id="pixelCanvas" width="1000" height="1000"></canvas>
             <!-- https://stackoverflow.com/questions/2928827/access-php-var-from-external-javascript-file -->
             <script type="text/javascript">
-                var pixel_colors = "<?= echo $jsPixelColors ?>";
+                var pixel_colors = "<?= $jsPixelColors ?>";
             </script>
             <script src="app.js"></script>
 		</div>

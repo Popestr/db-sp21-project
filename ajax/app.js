@@ -9,6 +9,7 @@ let canvasHeight = canvas.height;
 
 let gridInfo = [];
 let totalSelected = 0;
+
 let thisColor = "white";
 var pix_color_result = JSON.parse(pixel_colors)
 
