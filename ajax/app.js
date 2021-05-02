@@ -48,7 +48,7 @@ function makeGrid(numRows, numCols, color) {
 function init(){
     let numRows = 20;
     let numCols = 20;
-
+    alert(pixel_colors[0]);
     makeGrid(numRows, numCols, "black");
 
     /*
