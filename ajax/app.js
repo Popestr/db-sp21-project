@@ -24,6 +24,7 @@ function makeGrid(numRows, numCols, color) {
     for(let i = 0; i < numRows; i++){
         gridInfo[i] = [];
         for(let j = 0; j < numCols; j++){
+            console.log(i*20+j+1)
             thisColor = pixel_colors[i*20+j+1].color; // + 1 because pixel_id is from 1-400 b/c auto_increment in phpmyadmin starts from 1
             gridInfo[i][j] = {color:thisColor, charity:"None", selected:false};
         }
