@@ -72,22 +72,24 @@ if (!isset($_SESSION['loggedin'])) {
             </script> -->
             <script src="app.js"></script>
 		</div>
-        <div id="purchase-info">
-            <div id="purchase-header">Purchase Info</div>
-            <hr />
-            <div id="purchase-contents">
+        <?php if(isset($_SESSION['userrole']) && $_SESSION['userrole'] == 'hs2fw_b'){ ?>
+            <div id="purchase-info">
+                <div id="purchase-header">Purchase Info</div>
+                <hr />
+                <div id="purchase-contents">
+                </div>
+                <hr />
+                <div id="purchase-bottom">
+                    <!-- <form action="https://www.sandbox.paypal.com/donate" method="post" target="_top">
+                        <input type="hidden" name="hosted_button_id" value="HYSZKYCADBDKW" />
+                        <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit" title="PayPal - The safer, easier way to pay online!" alt="Donate with PayPal button" />
+                        <img alt="" border="0" src="https://www.sandbox.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1" />
+                    </form> -->
+                    <button id="purchase-button" onclick="collectAndPurchase()">Complete Purchase</button>
+                    <div id="purchase-total"><strong>Order Total</strong><br/>$<span id="total-num">0</span>.00</div>
+                </div>
             </div>
-            <hr />
-            <div id="purchase-bottom">
-                <!-- <form action="https://www.sandbox.paypal.com/donate" method="post" target="_top">
-                    <input type="hidden" name="hosted_button_id" value="HYSZKYCADBDKW" />
-                    <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit" title="PayPal - The safer, easier way to pay online!" alt="Donate with PayPal button" />
-                    <img alt="" border="0" src="https://www.sandbox.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1" />
-                </form> -->
-                <button id="purchase-button" onclick="collectAndPurchase()">Complete Purchase</button>
-                <div id="purchase-total"><strong>Order Total</strong><br/>$<span id="total-num">0</span>.00</div>
-            </div>
-        </div>
+        <?php } ?>
     </div>
 	</body>
 </html>
