@@ -5,9 +5,9 @@ require_once('./config.php');
 $update = false;
 
 if (isset($_GET['edit'])) {
-	$id = $_GET['edit'];
+	$feedback_id = $_GET['edit'];
 	$update = true;
-	$record = mysqli_query($con, "SELECT * FROM Feedbacks WHERE id='{$id}'");
+	$record = mysqli_query($con, "SELECT * FROM Feedbacks WHERE feedback_id='{$feedback_id}'");
 	if (count($record) == 1) {
 		$n = mysqli_fetch_array($record);
 		$title = $n['title'];
@@ -32,7 +32,7 @@ if (isset($_GET['edit'])) {
 			<h1>Feedback Form</h1>
 			<form action="feedback.php" method="post" autocomplete="off" onSubmit="alert('Successful!')">
 				<?php if ($update == true): ?>
-					<input type="hidden" name="id" value="<?php echo $id;?>">
+					<input type="hidden" name="id" value="<?php echo $feedback_id;?>">
 					<input type="text" name="title" value="<?php echo $title?>" id="title" required>
 					<textarea type="text" name="content" id="content" required><?php echo $content?></textarea>
 					<input type="submit" value="Update" id="updateForm" name="updateForm">

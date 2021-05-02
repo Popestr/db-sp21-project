@@ -21,11 +21,11 @@ if(isset($_POST['submitForm'])){
 }
 
 if(isset($_POST['updateForm'])){
-    if ($stmt = $con->prepare('UPDATE Feedbacks SET title=?, content=? WHERE id=?')) {
-        $id = $_POST['id'];
+    if ($stmt = $con->prepare('UPDATE Feedbacks SET title=?, content=? WHERE feedback_id=?')) {
+        $feedback_id = $_POST['id'];
         $title = $_POST['title'];
         $content = $_POST['content'];
-        $stmt->bind_param('ssi', $title, $content, $id);
+        $stmt->bind_param('ssi', $title, $content, $feedback_id);
         $stmt->execute();
         header('Location: manageFeedbacks.php');
         $_SESSION['message'] = "Feedback modified!"; 
@@ -36,13 +36,13 @@ if(isset($_POST['updateForm'])){
 }
 
 if (isset($_GET['del'])) {
-    if ($stmt = $con->prepare('DELETE FROM Feedbacks WHERE id=?')) {
-        $id = $_GET['del'];
-        $stmt->bind_param('i', $id);
+    if ($stmt = $con->prepare('DELETE FROM Feedbacks WHERE feedback_id=?')) {
+        $feedback_id = $_GET['del'];
+        $stmt->bind_param('i', $feedback_id);
         $stmt->execute();
         if($_SESSION['userrole'] == 'hs2fw_a'){
             header('Location: admin.php');
-        }else{
+        }else if($_SESSION['userrole'] == 'hs2fw_b'){
             header('Location: manageFeedbacks.php');
         }
         $_SESSION['message'] = "Feedback deleted!"; 

@@ -2,14 +2,7 @@
 // We need to use sessions, so you should always start sessions using the below code.
 session_start();
 ini_set('display_errors', 1);
-require_once('./library.php'); //to connect to the database
-$con = new mysqli($SERVER, $USERNAME, $PASSWORD, $DATABASE);
-
-//check connection
-if (mysqli_connect_errno())
-{
-echo "Failed to connect to MySQL: " . mysqli_connect_error();
-}
+require_once('./config.php');
 $stmt = $con->prepare('SELECT password, email FROM Users WHERE id = ?');
 $stmt->bind_param('i', $_SESSION['id']);
 $stmt->execute();

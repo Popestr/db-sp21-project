@@ -4,7 +4,6 @@ session_start();
 ini_set('display_errors', 1);
 require_once('./config.php'); //to connect to the database
 
-
 if (!isset($_SESSION['userrole']) || $_SESSION['userrole'] != 'hs2fw_b') {
     echo "<script>alert('Unauthorized!')</script>";
 	exit;
@@ -12,7 +11,6 @@ if (!isset($_SESSION['userrole']) || $_SESSION['userrole'] != 'hs2fw_b') {
 
 $sqlFeedback = "SELECT * FROM `Feedbacks` WHERE username='{$_SESSION['name']}'";
 $feedbackResult = mysqli_query($con, $sqlFeedback);
-
 ?>
 
 <!DOCTYPE html>
@@ -35,8 +33,8 @@ $feedbackResult = mysqli_query($con, $sqlFeedback);
 					echo "<tr><td>" . "Username:" . "</td><td>" . $row['username'] . "</td></tr>"; 
 					echo "<tr><td>" . "Title:" . "</td><td>" . $row['title'] . "</td></tr>"; 
 					echo "<tr><td>" . "Comment:" . "</td><td>" . $row['content'] . "</td></tr>"; 
-					echo "<tr><td>" . "<a href='feedbackform.php?edit=" . $row['id'] . "' class='edit_btn'> Edit </a>" . "</td>"; 
-					echo "<td>" . "<a href='feedback.php?del=" . $row['id'] . "' class='del_btn'> Delete </a>" . "</td></tr>"; 
+					echo "<tr><td>" . "<a href='feedbackform.php?edit=" . $row['feedback_id'] . "' class='edit_btn'> Edit </a>" . "</td>"; 
+					echo "<td>" . "<a href='feedback.php?del=" . $row['feedback_id'] . "' class='del_btn'> Delete </a>" . "</td></tr>"; 
 					echo "</table></div>";
 				}
 			?>

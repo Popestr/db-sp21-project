@@ -2,14 +2,7 @@
 session_start();
 ini_set('display_errors', 1);
 include('./lib/password.php');
-require_once('./library.php'); //to connect to the database
-$con = new mysqli($SERVER, $USERNAME, $PASSWORD, $DATABASE);
-
-//check connection
-if (mysqli_connect_errno())
-{
-echo "Failed to connect to MySQL: " . mysqli_connect_error();
-}
+require_once('./config.php');
 
 if (!isset($_POST['username'], $_POST['password'], $_POST['email'])) {
     echo "<script>alert('Please complete the registration form!')</script>";
