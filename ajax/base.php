@@ -6,25 +6,67 @@ if (!isset($_SESSION['loggedin'])) {
 ?>
 
 <!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="utf-8">
-		<link href="styles/css/feedback.css" rel="stylesheet" type="text/css">
-		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
-	</head>
-	<nav class="navtop">
-        <div>
-            <h1><a href="home.php"> <img src="static/images/logo.png" style="padding-left=-10" height="200" width="400" alt="PFH Logo"></a> </h1>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style>
+        /* Modify the background color */
+          
+        .navbar-custom {
+            background-color: black;
+        }
+        /* Modify brand and text color */
+        a:hover {
+            color: white;
+        }
+        .navbar-text {
+            color: white;
+            padding-right: 10px;
+            font-size: 20px;
+        }
+    </style>
+    <title>Pixels for Humanity</title>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-custom">
+    <div class="container">
+        <a class="navbar-brand" href="home.php">
+            <img src="static/images/logo2.png" height="100" width="200" alt="">
+            </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item active">
+            <a class="navbar-text" href="home.php">Home
+                <span class="sr-only">(current)</span>
+            </a>
+            </li>
+
             <?php
                 // If the user is not logged in redirect to the login page...
                 if (isset($_SESSION['userrole']) && $_SESSION['userrole'] == 'hs2fw_a') {
-                    echo '<a href="admin.php"><i></i>Admin</a>';
+                    echo '<li class="nav-item"><a class="navbar-text" href="admin.php"><i></i>Admin</a></li>';
                 }elseif(isset($_SESSION['userrole']) && $_SESSION['userrole'] == 'hs2fw_b'){
-                    echo '<a href="feedbackform.php"><i></i>Feedback</a>';
+                    echo '<li class="nav-item"><a class="navbar-text" href="feedbackform.php"><i></i>Feedback</a></li>';
                 }
             ?>
-            <a href="profile.php"><i class="fas fa-user-circle"></i>Profile</a>
-            <a href="logout.php"><i class="fas fa-sign-out-alt"></i>Logout</a>
+
+            <li class="nav-item">
+                <a class="navbar-text" href="profile.php">Profile</a>
+            </li>
+            <li class="nav-item">
+                <a class="navbar-text" href="logout.php">Logout</a>
+            </li>
+        </ul>
         </div>
+    </div>
     </nav>
+  </body>
 </html>
