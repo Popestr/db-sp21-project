@@ -12,6 +12,7 @@ let totalSelected = 0;
 
 let thisColor = "white";
 
+
 function makeGrid(numRows, numCols, color) {
     ctx.fillStyle = "white";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -48,7 +49,7 @@ function makeGrid(numRows, numCols, color) {
 function init(){
     let numRows = 20;
     let numCols = 20;
-    alert(pixel_colors[0]);
+
     makeGrid(numRows, numCols, "black");
 
     /*
