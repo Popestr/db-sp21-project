@@ -10,6 +10,9 @@ let canvasHeight = canvas.height;
 let gridInfo = [];
 let totalSelected = 0;
 
+let thisColor = "white";
+
+
 function makeGrid(numRows, numCols, color) {
     ctx.fillStyle = "white";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -17,11 +20,13 @@ function makeGrid(numRows, numCols, color) {
     ctx.strokeStyle = color || "black";
     let width = canvasWidth / numCols;
     let height = canvasHeight / numRows;
-
+    
     for(let i = 0; i < numRows; i++){
         gridInfo[i] = [];
         for(let j = 0; j < numCols; j++){
-            gridInfo[i][j] = {color:"white", charity:"None", selected:false}
+            console.log(i*20+j+1)
+            thisColor = pixel_colors[i*20+j].color; // + 1 because pixel_id is from 1-400 b/c auto_increment in phpmyadmin starts from 1
+            gridInfo[i][j] = {color:thisColor, charity:"None", selected:false};
         }
     }
 
@@ -47,6 +52,16 @@ function init(){
     let numCols = 20;
 
     makeGrid(numRows, numCols, "black");
+    console.log(gridInfo[0][0].color)
+    
+    for(let i = 0; i < numRows; i++){ //draw in the squares based on the DB query. Since drawSquare function also sets              
+                                      // charity and selected, reset those fields
+        for(let j = 0; j < numCols; j++){
+            drawSquare(i,j,gridInfo[i][j].color)
+            gridInfo[i][j].charity = "None"
+            gridInfo[i][j].selected = false
+        }
+    }
 
     function findIndex(num, size) {
         num = num - (num % size);
