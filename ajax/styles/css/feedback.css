@@ -1,40 +1,4 @@
 
-.navtop {
-	background-color: black;
-	height: 60px;
-	width: 100%;
-	border: 0;
-}
-.navtop div {
-	display: flex;
-	margin: 0 auto;
-	width: 1000px;
-	height: 100%;
-}
-.navtop div h1, .navtop div a {
-	display: inline-flex;
-	align-items: center;
-}
-.navtop div h1 {
-	flex: 1;
-	font-size: 24px;
-	padding: 0;
-	margin: 0;
-	color: #eaebed;
-	font-weight: normal;
-}
-.navtop div a {
-	padding: 0 0px 0 0px;
-	text-decoration: none;
-	color: #c1c4c8;
-	font-weight: bold;
-}
-.navtop div a i {
-	padding: 2px 8px 0 20px;
-}
-.navtop div a:hover {
-	color: #eaebed;
-}
 body.loggedin {
 	background-color: #f3f4f7;
 }
@@ -79,7 +43,7 @@ body {
     margin: 0;
 }
 .register {
-    width: 800px;
+    width: 700px;
     background-color: #ffffff;
     box-shadow: 0 0 9px 0 rgba(0, 0, 0, 0.3);
     margin: 100px auto;

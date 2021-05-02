@@ -37,7 +37,7 @@ if (isset($_GET['edit'])) {
 					<textarea type="text" name="content" id="content" required><?php echo $content?></textarea>
 					<input type="submit" value="Update" id="updateForm" name="updateForm">
 				<?php else: ?>
-					<input type="text" name="title" placeholder="Title" id="title" required>
+					<input type="text" name="title" placeholder="Subject" id="title" required>
 					<textarea type="text" name="content" placeholder="Comment" id="content" required></textarea>
 					<input type="submit" value="Submit" id="submitForm" name="submitForm">
 				<?php endif ?>

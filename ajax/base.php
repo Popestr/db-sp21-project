@@ -24,8 +24,13 @@ if (!isset($_SESSION['loggedin'])) {
         a:hover {
             color: white;
         }
-        .navbar-text {
+        .navbar-text1 {
             color: white;
+            padding-right: 10px;
+            font-size: 20px;
+        }
+        .navbar-text2 {
+            color: #b23b3b;
             padding-right: 10px;
             font-size: 20px;
         }
@@ -44,25 +49,23 @@ if (!isset($_SESSION['loggedin'])) {
         <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
             <li class="nav-item active">
-            <a class="navbar-text" href="home.php">Home
+            <a class="navbar-text1" href="home.php">Home
                 <span class="sr-only">(current)</span>
             </a>
             </li>
-
+            <li class="nav-item">
+                <a class="navbar-text1" href="profile.php">Profile</a>
+            </li>
             <?php
                 // If the user is not logged in redirect to the login page...
                 if (isset($_SESSION['userrole']) && $_SESSION['userrole'] == 'hs2fw_a') {
-                    echo '<li class="nav-item"><a class="navbar-text" href="admin.php"><i></i>Admin</a></li>';
+                    echo '<li class="nav-item"><a class="navbar-text1" href="admin.php"><i></i>Admin</a></li>';
                 }elseif(isset($_SESSION['userrole']) && $_SESSION['userrole'] == 'hs2fw_b'){
-                    echo '<li class="nav-item"><a class="navbar-text" href="feedbackform.php"><i></i>Feedback</a></li>';
+                    echo '<li class="nav-item"><a class="navbar-text1" href="feedbackform.php"><i></i>Feedback</a></li>';
                 }
             ?>
-
             <li class="nav-item">
-                <a class="navbar-text" href="profile.php">Profile</a>
-            </li>
-            <li class="nav-item">
-                <a class="navbar-text" href="logout.php">Logout</a>
+                <a class="navbar-text2" href="logout.php">Logout</a>
             </li>
         </ul>
         </div>
