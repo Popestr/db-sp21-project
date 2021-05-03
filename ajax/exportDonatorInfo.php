@@ -5,7 +5,7 @@ require_once('./config.php');
 
 // adapted from https://dev.to/madeinmilwaukee/php-mysqli-and-csv-export-from-database-5a3j
 
-$q = "SELECT u.email, SUM(p.amount) as \"total pixels bought\"
+$q = "SELECT u.email, COUNT(p.amount) as \"total pixels bought\"
 FROM `Pixel_Purchases` pp 
 LEFT OUTER JOIN `Purchases` p on p.purchase_id=pp.purchase_id 
 LEFT OUTER JOIN `Pixel_Charities` pc on pc.pixel_id=pp.pixel_id
