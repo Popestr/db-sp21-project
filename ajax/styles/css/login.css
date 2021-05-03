@@ -278,6 +278,10 @@ body {
     background-color: lightcyan;
 }
 
+#charityinput{
+    float:right;
+    width:300px;
+}
 /* #color-preview{
     position: absolute;
     top:25%;
