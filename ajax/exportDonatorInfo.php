@@ -3,6 +3,25 @@
 session_start();
 require_once('./config.php');
 
+// from https://stackoverflow.com/questions/8321096/
+function fetchAssocStatement($stmt)
+{
+    if($stmt->num_rows>0)
+    {
+        $result = array();
+        $md = $stmt->result_metadata();
+        $params = array();
+        while($field = $md->fetch_field()) {
+            $params[] = &$result[$field->name];
+        }
+        call_user_func_array(array($stmt, 'bind_result'), $params);
+        if($stmt->fetch())
+            return $result;
+    }
+
+    return null;
+}
+
 // adapted from https://dev.to/madeinmilwaukee/php-mysqli-and-csv-export-from-database-5a3j
 
 $q = "SELECT u.email, COUNT(p.amount) as \"total pixels bought\"
@@ -17,14 +36,14 @@ GROUP BY u.email ";
 $stmt = $con->prepare($q);
 $stmt->bind_param('ii', $_GET["cid"], $_SESSION["id"]);
 $stmt->execute();
-$result = $stmt->get_result();
-if ($result->num_rows > 0) {
+$stmt->store_result();
+if ($stmt->num_rows > 0) {
    //These next 3 Lines Set the CSV header line if needed
-   $data = $result->fetch_assoc();
+   $data = fetchAssocStatement($stmt);
    $csv[] = array_keys($data);
-   $result->data_seek(0);
+   $stmt->data_seek(0);
    //SET THE CSV BODY LINES
-    while ($data = $result->fetch_assoc()) {
+    while ($data = fetchAssocStatement($stmt)) {
         $csv[] = array_values($data);
     }
     header('Content-Type: application/csv');
