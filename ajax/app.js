@@ -212,8 +212,4 @@ function collectAndPurchase() {
     })
 }
 
-$(window).scroll(function () {
-    $("#purchase-info").stop().animate({ "marginTop": ($(window).scrollTop()) + 100 + "px", "marginLeft": ($(window).scrollLeft()) + "px" }, "slow");
-});
-
-window.onload = init();
+document.onload = init();

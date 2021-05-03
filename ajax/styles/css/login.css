@@ -198,8 +198,8 @@ body {
     font-weight: bold;
     border-radius: 3px;
     color: white;
-    height: 4em;
-    padding-top: 1em;
+    height: 3em;
+    padding-top: 0.7em;
     font-size: 30px;
 }
 
@@ -253,7 +253,7 @@ body {
 #user-purchases{
     width:100%;
     background-color: white;
-    margin-bottom: 25%;
+    margin-bottom: 5%;
     margin-top: 5%;
 }
 
@@ -269,6 +269,13 @@ body {
 }
 #clear-button:hover{
     background-color: darkgray;
+}
+
+#charity-request-button{
+    float:right;
+    outline:none;
+    padding: 10px;
+    background-color: lightcyan;
 }
 
 /* #color-preview{

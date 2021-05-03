@@ -18,6 +18,14 @@ LEFT OUTER JOIN `Pixel_Charities` pchars on pchars.pixel_id = pp.pixel_id
 LEFT OUTER JOIN `Charities` chars on chars.charity_id = pchars.charity_id
 WHERE p.purchaser_id=? ORDER BY purchase_date DESC");
 
+$stmt_charities = mysqli_prepare($con, "SELECT purchase_date, pp.pixel_id, color, charity_name FROM `Pixel_Purchases` pp
+LEFT OUTER JOIN `Pixel_Colors` pc on pc.pixel_id = pp.pixel_id 
+LEFT OUTER JOIN `Colors` c on c.color_name = pc.color
+LEFT OUTER JOIN `Purchases` p on p.purchase_id = pp.purchase_id
+LEFT OUTER JOIN `Pixel_Charities` pchars on pchars.pixel_id = pp.pixel_id
+LEFT OUTER JOIN `Charities` chars on chars.charity_id = pchars.charity_id
+WHERE p.purchaser_id=? ORDER BY purchase_date DESC");
+
 mysqli_stmt_bind_param($stmt_purch, "i", $_SESSION["id"]);
 mysqli_stmt_execute($stmt_purch);
 mysqli_stmt_bind_result($stmt_purch, $pdate, $pixid, $color, $charname);
@@ -59,6 +67,16 @@ mysqli_stmt_bind_result($stmt_purch, $pdate, $pixid, $color, $charname);
 						echo "<tr><td>".$pdate."</td><td>".$pixid."</td><td>".$color."</td><td>".$charname."</td></tr>";
 					}
 				?>
+			</table>
+			<h2>Charities<a href="charityrequest.php"><button id="charity-request-button">Request a Charity</button></a></h2>
+			<div id="charity-manage-header"> It looks like you're not managing any charities yet.</div>
+			<table id="user-purchases">
+				<!-- <tr><th>Date</th><th>Pixel ID</th><th>Pixel Color</th><th>Charity</th></tr> -->
+				<!-- <?php 
+					while (mysqli_stmt_fetch($stmt_purch)) {
+						echo "<tr><td>".$pdate."</td><td>".$pixid."</td><td>".$color."</td><td>".$charname."</td></tr>";
+					}
+				?> -->
 			</table>
 		</div>
 	</body>

@@ -71,7 +71,7 @@ if (!isset($_SESSION['loggedin'])) {
                 var pixel_colors = <?php echo $jsPixelColors; ?>; //pass to app.js
             </script> -->
             <script src="app.js"></script>
-            <button id="clear-button" onClick="window.location.reload();" style="float: right; width: 1000px; height: 50px">Clear Canvas</button>
+            <button id="clear-button" onClick="window.location.reload();" style="float: right; width: 1000px; height: 50px">Clear Selections</button>
 		</div>
         <?php if(isset($_SESSION['userrole']) && $_SESSION['userrole'] == 'hs2fw_b'){ ?>
             <div id="purchase-info">
