@@ -167,14 +167,14 @@ body {
 #charity{
     float: right;
     position: relative;
-    right: 25%;
-    width:25%
+    right: 10%;
+    width:40%
 }
 
 #colorsel{
     position: relative;
-    width:25%;
-    left: 25%;
+    width:40%;
+    left: 10%;
 }
 
 #grid-container{

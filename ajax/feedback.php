@@ -6,11 +6,11 @@ require_once('./config.php');
 $update = false;
 
 if(isset($_POST['submitForm'])){
-    if ($stmt = $con->prepare('INSERT INTO Feedbacks (username, title, content) VALUES (?, ?, ?)')) {
+    if ($stmt = $con->prepare('INSERT INTO Feedbacks (user_id, title, content) VALUES (?, ?, ?)')) {
         $username = $_SESSION['name'];
         $title = $_POST['title'];
         $content = $_POST['content'];
-        $stmt->bind_param('sss', $username, $title, $content);
+        $stmt->bind_param('iss', $_SESSION["id"], $title, $content);
         $stmt->execute();
         header('Location: feedbackform.php');
         $_SESSION['message'] = "Feedback Submitted!"; 

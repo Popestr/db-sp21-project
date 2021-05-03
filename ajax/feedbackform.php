@@ -6,12 +6,26 @@ $update = false;
 
 if (isset($_GET['edit'])) {
 	$feedback_id = $_GET['edit'];
-	$update = true;
-	$record = mysqli_query($con, "SELECT * FROM Feedbacks WHERE feedback_id='{$feedback_id}'");
-	if (count($record) == 1) {
+	if($_SESSION['userrole'] == "hs2fw_a"){
+		$update = true;
+		$record = mysqli_query($con, "SELECT * FROM Feedbacks WHERE feedback_id='{$feedback_id}'");
 		$n = mysqli_fetch_array($record);
-		$title = $n['title'];
-		$content = $n['content'];
+		if (!empty($n)) {
+			$title = $n['title'];
+			$content = $n['content'];
+		}
+	}
+	else if($_SESSION['userrole'] == "hs2fw_b"){
+		$update = true;
+		$record = mysqli_query($con, "SELECT * FROM Feedbacks WHERE feedback_id='{$feedback_id}' AND user_id='{$_SESSION['id']}'");
+		$n = mysqli_fetch_array($record);
+		if (!empty($n)) {
+			$title = $n['title'];
+			$content = $n['content'];
+		}
+		else{
+			$update = false;
+		}
 	}
 }
 ?>

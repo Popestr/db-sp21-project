@@ -9,7 +9,7 @@ if (!isset($_SESSION['userrole']) || $_SESSION['userrole'] != 'hs2fw_b') {
 	exit;
 }
 
-$sqlFeedback = "SELECT * FROM `Feedbacks` WHERE username='{$_SESSION['name']}'";
+$sqlFeedback = "SELECT f.*, u.username FROM `Feedbacks` f LEFT OUTER JOIN `Users` u ON u.id = f.user_id WHERE user_id='{$_SESSION['id']}'";
 $feedbackResult = mysqli_query($con, $sqlFeedback);
 ?>
 
