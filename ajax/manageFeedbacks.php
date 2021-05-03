@@ -22,22 +22,17 @@ $feedbackResult = mysqli_query($con, $sqlFeedback);
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
 	</head>
 	<body class="loggedin">
+		<h2>Manage feedbacks here.</h2>
 		<?php
-		include("base.php");
+			while($row = mysqli_fetch_array($feedbackResult)){  
+				echo "<div><table>";
+				echo "<tr><td>" . "Username:" . "</td><td>" . $row['username'] . "</td></tr>"; 
+				echo "<tr><td>" . "Title:" . "</td><td>" . $row['title'] . "</td></tr>"; 
+				echo "<tr><td>" . "Comment:" . "</td><td>" . $row['content'] . "</td></tr>"; 
+				echo "<tr><td>" . "<a href='feedbackform.php?edit=" . $row['feedback_id'] . "' class='edit_btn'> Edit </a>" . "</td>"; 
+				echo "<td>" . "<a href='feedback.php?del=" . $row['feedback_id'] . "' class='del_btn'> Delete </a>" . "</td></tr>"; 
+				echo "</table></div>";
+			}
 		?>
-		<div class="content">
-			<h2>Manage feedbacks here.</h2>
-			<?php
-				while($row = mysqli_fetch_array($feedbackResult)){  
-					echo "<div><table>";
-					echo "<tr><td>" . "Username:" . "</td><td>" . $row['username'] . "</td></tr>"; 
-					echo "<tr><td>" . "Title:" . "</td><td>" . $row['title'] . "</td></tr>"; 
-					echo "<tr><td>" . "Comment:" . "</td><td>" . $row['content'] . "</td></tr>"; 
-					echo "<tr><td>" . "<a href='feedbackform.php?edit=" . $row['feedback_id'] . "' class='edit_btn'> Edit </a>" . "</td>"; 
-					echo "<td>" . "<a href='feedback.php?del=" . $row['feedback_id'] . "' class='del_btn'> Delete </a>" . "</td></tr>"; 
-					echo "</table></div>";
-				}
-			?>
-		</div>
 	</body>
 </html>

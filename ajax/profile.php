@@ -27,14 +27,14 @@ try {
     throw $exception;
 }
 
-
-
 mysqli_stmt_bind_param($stmt_purch, "i", $_SESSION["id"]);
 mysqli_stmt_bind_param($stmt_charities, "i", $_SESSION["id"]);
 mysqli_stmt_execute($stmt_purch);
 mysqli_stmt_bind_result($stmt_purch, $pdate, $pixid, $color, $charname, $cid);
 mysqli_stmt_store_result($stmt_purch);
 
+$sqlFeedback = "SELECT f.*, u.username FROM `Feedbacks` f LEFT OUTER JOIN `Users` u ON u.id = f.user_id WHERE user_id='{$_SESSION['id']}'";
+$feedbackResult = mysqli_query($con, $sqlFeedback);
 ?>
 
 <!DOCTYPE html>
@@ -94,6 +94,22 @@ mysqli_stmt_store_result($stmt_purch);
 					}
 				?>
 			</table>
+			<?php endif ?>
+			<h2>Manage feedbacks here.</h2>
+			<?php if(mysqli_num_rows($feedbackResult) == 0): ?>
+				<div id="charity-manage-header"> It looks like no feedbacks were made by you.</div>
+			<?php else: ?>
+				<?php 
+					while($row = mysqli_fetch_array($feedbackResult)){  
+						echo "<div><table>";
+						echo "<tr><td>" . "Username:" . "</td><td>" . $row['username'] . "</td></tr>"; 
+						echo "<tr><td>" . "Title:" . "</td><td>" . $row['title'] . "</td></tr>"; 
+						echo "<tr><td>" . "Comment:" . "</td><td>" . $row['content'] . "</td></tr>"; 
+						echo "<tr><td>" . "<a href='feedbackform.php?edit=" . $row['feedback_id'] . "' class='edit_btn'> Edit </a>" . "</td>"; 
+						echo "<td>" . "<a href='feedback.php?del=" . $row['feedback_id'] . "' class='del_btn'> Delete </a>" . "</td></tr>"; 
+						echo "</table></div>";
+					}
+				?>
 			<?php endif ?>
 		</div>
 	</body>

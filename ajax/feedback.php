@@ -27,7 +27,7 @@ if(isset($_POST['updateForm'])){
         $content = $_POST['content'];
         $stmt->bind_param('ssi', $title, $content, $feedback_id);
         $stmt->execute();
-        header('Location: manageFeedbacks.php');
+        header('Location: profile.php');
         $_SESSION['message'] = "Feedback modified!"; 
         $stmt->close();
     }else{
@@ -43,7 +43,7 @@ if (isset($_GET['del'])) {
         if($_SESSION['userrole'] == 'hs2fw_a'){
             header('Location: admin.php');
         }else if($_SESSION['userrole'] == 'hs2fw_b'){
-            header('Location: manageFeedbacks.php');
+            header('Location: profile.php');
         }
         $_SESSION['message'] = "Feedback deleted!"; 
         $stmt->close();

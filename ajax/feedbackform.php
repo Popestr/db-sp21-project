@@ -57,8 +57,5 @@ if (isset($_GET['edit'])) {
 				<?php endif ?>
 			</form>
 		</div>
-		<div class="register">
-			<a href="manageFeedbacks.php">Manage Past Feedback</a>
-		</div>
 	</body>
 </html>
