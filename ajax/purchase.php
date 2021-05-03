@@ -10,7 +10,8 @@ $amount = $_POST["amt"];
 
 mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 
-mysqli_begin_transaction($con);
+// mysqli_begin_transaction($con);
+mysqli_query($con, "START TRANSACTION");
 
 $aiq = "SELECT purchase_id FROM `Purchases` ORDER BY purchase_id DESC LIMIT 1";
 
@@ -43,10 +44,12 @@ try {
         mysqli_stmt_execute($stmt_subtotal);
     }
 
-    mysqli_commit($con);
+    mysqli_query($con, "COMMIT");
+    // mysqli_commit($con);
 
 } catch (mysqli_sql_exception $exception) {
-    mysqli_rollback($mysqli);
+    mysqli_query($con, "ROLLBACK");
+    // mysqli_rollback($mysqli);
 
     // throw $exception;
 }
