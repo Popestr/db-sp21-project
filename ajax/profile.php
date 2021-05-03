@@ -35,6 +35,7 @@ mysqli_stmt_store_result($stmt_purch);
 
 $sqlFeedback = "SELECT f.*, u.username FROM `Feedbacks` f LEFT OUTER JOIN `Users` u ON u.id = f.user_id WHERE user_id='{$_SESSION['id']}'";
 $feedbackResult = mysqli_query($con, $sqlFeedback);
+
 ?>
 
 <!DOCTYPE html>
@@ -44,6 +45,8 @@ $feedbackResult = mysqli_query($con, $sqlFeedback);
 		<title>Profile Page</title>
 		<link href="styles/css/login.css" rel="stylesheet" type="text/css">
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
+		<script src="js/jquery-1.6.2.min.js" type="text/javascript"></script> 
+		<script src="js/jquery-ui-1.8.16.custom.min.js" type="text/javascript"></script>
 	</head>
 	<body class="loggedin">
 		<?php
@@ -81,6 +84,26 @@ $feedbackResult = mysqli_query($con, $sqlFeedback);
 				?>
 			</table>
 			<?php endif ?>
+
+			<h2>Purchases filterable</h2>
+			<script>
+				$(document).ready(function() {
+					$( "#charityinput" ).change(function() {
+						$.ajax({
+							url: 'purchasesajax.php', 
+							data: {charity_name: $( "#charityinput" ).val()},
+							success: function(data){
+								$('#charityresult').html(data);	
+							}
+						});
+					});
+				});
+			</script>
+			<div>
+				<input class="xlarge" id="charityinput" type="search" size="30" placeholder="Charity name contains">
+				<div id="charityresult"></div>
+			</div>
+
 			<h2>Charities You Manage<a href="charityrequest.php"><button id="charity-request-button">Request a Charity</button></a></h2>
 			<?php if(mysqli_stmt_num_rows($stmt_charities) == 0): ?>
 				<div id="charity-manage-header"> It looks like you're not managing any charities yet.</div>
@@ -95,7 +118,8 @@ $feedbackResult = mysqli_query($con, $sqlFeedback);
 				?>
 			</table>
 			<?php endif ?>
-			<h2>Manage feedbacks here.</h2>
+
+			<h2>Manage feedbacks here</h2>
 			<?php if(mysqli_num_rows($feedbackResult) == 0): ?>
 				<div id="charity-manage-header"> It looks like no feedbacks were made by you.</div>
 			<?php else: ?>
