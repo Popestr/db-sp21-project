@@ -9,8 +9,11 @@ if (!isset($_SESSION['userrole']) || $_SESSION['userrole'] != 'hs2fw_a') {
 	exit;
 }
 
-$sqlFeedback = "SELECT * FROM `Feedbacks`";
+$sqlFeedback = "SELECT * FROM `Feedbacks` f LEFT OUTER JOIN `Users` u on u.id = f.user_id";
 $feedbackResult = mysqli_query($con, $sqlFeedback);
+
+$sqlCharityReq = "SELECT * FROM `Charity_Requests` cr LEFT OUTER JOIN `Users` u on u.id = cr.user_id";
+$creqResult = mysqli_query($con, $sqlCharityReq);
 ?>
 
 <!DOCTYPE html>
@@ -26,7 +29,7 @@ $feedbackResult = mysqli_query($con, $sqlFeedback);
 		include("base.php");
 		?>
 		<div class="content">
-			<h2>Admin Page, manage feedbacks here.</h2>
+			<h2>Manage Feedbacks</h2>
 			<?php
 				while($row = mysqli_fetch_array($feedbackResult)){  
 					echo "<div><table>";
@@ -34,6 +37,18 @@ $feedbackResult = mysqli_query($con, $sqlFeedback);
 					echo "<tr><td>" . "Title:" . "</td><td>" . $row['title'] . "</td></tr>"; 
 					echo "<tr><td>" . "Comment:" . "</td><td>" . $row['content'] . "</td></tr>"; 
 					echo "<tr><td>" . "<a href='feedback.php?del=" . $row['feedback_id'] . "' class='del_btn'> Delete </a>" . "</td></tr>"; 
+					echo "</table></div>";
+				}
+			?>
+			<h2>Manage Charity Requests</h2>
+			<?php
+				while($row = mysqli_fetch_array($creqResult)){  
+					echo "<div><table>";
+					echo "<tr><td>" . "Username:" . "</td><td>" . $row['username'] . "</td></tr>"; 
+					echo "<tr><td>" . "Charity Name:" . "</td><td>" . $row['charity_name'] . "</td></tr>"; 
+					echo "<tr><td>" . "Description:" . "</td><td>" . $row['content'] . "</td></tr>"; 
+					echo "<tr><td>" . "<a href='approveCharity.php?approve=" . $row['request_id'] . "' class='del_btn'> Approve Request </a>" . "</td></tr>";
+					echo "<tr><td>" . "<a href='approveCharity.php?deny=" . $row['request_id'] . "' class='del_btn'> Deny Request </a>" . "</td></tr>"; 
 					echo "</table></div>";
 				}
 			?>

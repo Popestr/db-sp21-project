@@ -18,8 +18,10 @@ $stmt_color = mysqli_prepare($con, "UPDATE `Pixel_Colors` SET color=? WHERE pixe
 $stmt_purch = mysqli_prepare($con, "INSERT INTO `Purchases` (amount, purchaser_id) VALUES (?, ?)");
 $stmt_ppx = mysqli_prepare($con, "INSERT INTO `Pixel_Purchases` (purchase_id, pixel_id) VALUES (?, ?)");
 $stmt_pchar = mysqli_prepare($con, "INSERT INTO `Pixel_Charities` (pixel_id, charity_id) VALUES (?, ?)");
+$stmt_subtotal = mysqli_prepare($con, "UPDATE `Charities` SET subtotal=subtotal+1 WHERE charity_id=?");
 mysqli_stmt_bind_param($stmt_color, "si", $color, $id);
 mysqli_stmt_bind_param($stmt_purch, "ii", $amount, $purchaser);
+mysqli_stmt_bind_param($stmt_subtotal, "i", $chr);
 
 
 mysqli_stmt_execute($stmt_purch);
@@ -38,14 +40,15 @@ try {
         mysqli_stmt_execute($stmt_color);
         mysqli_stmt_execute($stmt_ppx);
         mysqli_stmt_execute($stmt_pchar);
+        mysqli_stmt_execute($stmt_subtotal);
     }
 
     mysqli_commit($con);
-    
+
 } catch (mysqli_sql_exception $exception) {
     mysqli_rollback($mysqli);
 
-    throw $exception;
+    // throw $exception;
 }
 
 end:
@@ -54,6 +57,7 @@ mysqli_stmt_close($stmt_color);
 mysqli_stmt_close($stmt_ppx);
 mysqli_stmt_close($stmt_purch);
 mysqli_stmt_close($stmt_pchar);
+mysqli_stmt_close($stmt_subtotal);
 mysqli_close($con);
 
 ?>

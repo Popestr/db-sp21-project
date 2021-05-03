@@ -41,8 +41,9 @@ if (!isset($_SESSION['loggedin'])) {
         ?>
         <div id="grid-container">
 		<div class="content" id="main-content">
-            <h2>Select a color and a charity of your choice</h2>
-            <div class="container">
+            
+            <div class="container" <?php if($_SESSION["userrole"] == "hs2fw_a"){echo "hidden";}?>>
+            <h2>Select a color and a charity of your choice</h2><br>
                 <?php
                     echo "<span id='colorsel'><label id='color-label'>Color:</label><span id='color-preview'></span><select name='color-list' id='color-list'>";
                     while ($row = mysqli_fetch_array($colorResult)) {
@@ -71,7 +72,7 @@ if (!isset($_SESSION['loggedin'])) {
                 var pixel_colors = <?php echo $jsPixelColors; ?>; //pass to app.js
             </script> -->
             <script src="app.js"></script>
-            <button id="clear-button" onClick="window.location.reload();" style="float: right; width: 1000px; height: 50px">Clear Selections</button>
+            <button id="clear-button" onClick="window.location.reload();" style="float: right; width: 1000px; height: 50px" <?php if($_SESSION["userrole"] == "hs2fw_a"){echo "hidden";}?>>Clear Selections</button>
 		</div>
         <?php if(isset($_SESSION['userrole']) && $_SESSION['userrole'] == 'hs2fw_b'){ ?>
             <div id="purchase-info">

@@ -10,7 +10,7 @@ $stmt->bind_result($password, $email);
 $stmt->fetch();
 $stmt->close();
 
-$stmt_purch = mysqli_prepare($con, "SELECT purchase_date, pp.pixel_id, color, charity_name FROM `Pixel_Purchases` pp
+$stmt_purch = mysqli_prepare($con, "SELECT purchase_date, pp.pixel_id, color, charity_name, chars.charity_id FROM `Pixel_Purchases` pp
 LEFT OUTER JOIN `Pixel_Colors` pc on pc.pixel_id = pp.pixel_id 
 LEFT OUTER JOIN `Colors` c on c.color_name = pc.color
 LEFT OUTER JOIN `Purchases` p on p.purchase_id = pp.purchase_id
@@ -18,17 +18,22 @@ LEFT OUTER JOIN `Pixel_Charities` pchars on pchars.pixel_id = pp.pixel_id
 LEFT OUTER JOIN `Charities` chars on chars.charity_id = pchars.charity_id
 WHERE p.purchaser_id=? ORDER BY purchase_date DESC");
 
-$stmt_charities = mysqli_prepare($con, "SELECT purchase_date, pp.pixel_id, color, charity_name FROM `Pixel_Purchases` pp
-LEFT OUTER JOIN `Pixel_Colors` pc on pc.pixel_id = pp.pixel_id 
-LEFT OUTER JOIN `Colors` c on c.color_name = pc.color
-LEFT OUTER JOIN `Purchases` p on p.purchase_id = pp.purchase_id
-LEFT OUTER JOIN `Pixel_Charities` pchars on pchars.pixel_id = pp.pixel_id
-LEFT OUTER JOIN `Charities` chars on chars.charity_id = pchars.charity_id
-WHERE p.purchaser_id=? ORDER BY purchase_date DESC");
+mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
+try {
+
+	$stmt_charities = mysqli_prepare($con, "SELECT charity_name, subtotal FROM `Charity_Admins` ca LEFT OUTER JOIN `Charities` c ON c.charity_id = ca.charity_id WHERE admin_id = ?");
+    
+} catch (mysqli_sql_exception $exception) {
+    throw $exception;
+}
+
+
 
 mysqli_stmt_bind_param($stmt_purch, "i", $_SESSION["id"]);
+mysqli_stmt_bind_param($stmt_charities, "i", $_SESSION["id"]);
 mysqli_stmt_execute($stmt_purch);
-mysqli_stmt_bind_result($stmt_purch, $pdate, $pixid, $color, $charname);
+mysqli_stmt_bind_result($stmt_purch, $pdate, $pixid, $color, $charname, $cid);
+mysqli_stmt_store_result($stmt_purch);
 
 ?>
 
@@ -60,31 +65,42 @@ mysqli_stmt_bind_result($stmt_purch, $pdate, $pixid, $color, $charname);
 				</table>
 			</div>
 			<h2>Purchases</h2>
+			<?php if(mysqli_stmt_num_rows($stmt_purch) == 0): ?>
+				<div id="purchases-header"> It looks like you don't have any purchases yet.</div>
+			<?php else: ?>
 			<table id="user-purchases">
 				<tr><th>Date</th><th>Pixel ID</th><th>Pixel Color</th><th>Charity</th></tr>
 				<?php 
 					while (mysqli_stmt_fetch($stmt_purch)) {
 						echo "<tr><td>".$pdate."</td><td>".$pixid."</td><td>".$color."</td><td>".$charname."</td></tr>";
 					}
+					mysqli_stmt_close($stmt_purch);
+					mysqli_stmt_execute($stmt_charities);
+					mysqli_stmt_bind_result($stmt_charities, $cname, $subtotal);
+					mysqli_stmt_store_result($stmt_charities);
 				?>
 			</table>
-			<h2>Charities<a href="charityrequest.php"><button id="charity-request-button">Request a Charity</button></a></h2>
-			<div id="charity-manage-header"> It looks like you're not managing any charities yet.</div>
+			<?php endif ?>
+			<h2>Charities You Manage<a href="charityrequest.php"><button id="charity-request-button">Request a Charity</button></a></h2>
+			<?php if(mysqli_stmt_num_rows($stmt_charities) == 0): ?>
+				<div id="charity-manage-header"> It looks like you're not managing any charities yet.</div>
+			<?php else: ?>
 			<table id="user-purchases">
-				<!-- <tr><th>Date</th><th>Pixel ID</th><th>Pixel Color</th><th>Charity</th></tr> -->
-				<!-- <?php 
-					while (mysqli_stmt_fetch($stmt_purch)) {
-						echo "<tr><td>".$pdate."</td><td>".$pixid."</td><td>".$color."</td><td>".$charname."</td></tr>";
+				<tr><th>Charity Name</th><th>Total Pixels Donated</th><th>Export</th></tr>
+				<?php 
+					while (mysqli_stmt_fetch($stmt_charities)) {
+
+						echo "<tr><td>".$cname."</td><td>".$subtotal."</td><td><a href='exportDonatorInfo.php?cid=".$cid."'>Export Donator Info</a></td></tr>";
 					}
-				?> -->
+				?>
 			</table>
+			<?php endif ?>
 		</div>
 	</body>
 </html>
 
 <?php
-
-mysqli_stmt_close($stmt_purch);
+mysqli_stmt_close($stmt_charities);
 
 mysqli_close($con);
 
