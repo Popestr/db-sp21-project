@@ -5,7 +5,7 @@ session_start();
 require_once('./config.php');
 	
 // query for colors
-$sqlColor = "SELECT * FROM `Colors`";
+$sqlColor = "SELECT * FROM `Colors` WHERE NOT color_name = 'white'";
 
 // make the query and get the result
 $colorResult = mysqli_query($con, $sqlColor);

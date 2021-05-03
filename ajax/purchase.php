@@ -38,6 +38,11 @@ try {
         $id = $pix->id;
         $chr = $pix->charity;
 
+        if($color == "white"){
+            mysqli_query($con, "ROLLBACK");
+            goto end;
+        }
+
         mysqli_stmt_execute($stmt_color);
         mysqli_stmt_execute($stmt_ppx);
         mysqli_stmt_execute($stmt_pchar);
