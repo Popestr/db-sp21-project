@@ -5,6 +5,22 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
+
+a.edit_btn {
+    color: blue;
+}
+a.edit_btn:hover {
+    color: blue;
+}
+
+a.del_btn {
+    color: red;
+}
+
+a.del_btn:hover {
+    color: red;
+}
+
 .center {
     display: block;
     margin-left: auto;
